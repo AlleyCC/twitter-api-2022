@@ -4,7 +4,7 @@ const { imgurFileHandler } = require('../helpers/file-helper')
 const userServices = {
   signUp: (req, cb) => {
     // 密碼輸入不一致
-    if (req.body.password !== req.body.passwordCheck) throw new Error("Passwords doesn't match!")
+    if (req.body.password !== req.body.checkPassword) throw new Error("Passwords doesn't match!")
     return User.findOne({ where: { email: req.body.email } })
       .then(user => {
         // 錯誤處理: user已註冊
@@ -39,7 +39,7 @@ const userServices = {
     return User.findByPk(req.params.id, {
       include: [
         { model: Reply },
-        { model: Tweet, as: 'LikedTweets' },
+        { model: Tweet },
         { model: User, as: 'Followings' },
         { model: User, as: 'Followings' }
       ]

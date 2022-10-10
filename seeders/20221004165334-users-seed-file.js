@@ -8,7 +8,7 @@ module.exports = {
       password: await bcrypt.hash('12345678', 10),
       name: 'root',
       account: '@root',
-      is_admin: true,
+      role: 'admin',
       created_at: new Date(),
       updated_at: new Date()
     }, {
@@ -16,7 +16,7 @@ module.exports = {
       password: await bcrypt.hash('12345678', 10),
       name: 'user1',
       account: '@user1',
-      is_admin: false,
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date()
     }, {
@@ -27,8 +27,8 @@ module.exports = {
       nickname: faker.name.findName(),
       avatar: `https://loremflickr.com/320/240/boy,girl/?random=${Math.random() * 100}`,
       cover_photo: '',
-      intro: faker.lorem.text(),
-      is_admin: false,
+      introduction: faker.lorem.text(),
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date()
     }, {
@@ -39,8 +39,8 @@ module.exports = {
       nickname: faker.name.findName(),
       avatar: `https://loremflickr.com/320/240/boy,girl/?random=${Math.random() * 100}`,
       cover_photo: '',
-      intro: faker.lorem.text(),
-      is_admin: false,
+      introduction: faker.lorem.text(),
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date()
     }, {
@@ -51,8 +51,8 @@ module.exports = {
       nickname: faker.name.findName(),
       avatar: `https://loremflickr.com/320/240/boy,girl/?random=${Math.random() * 100}`,
       cover_photo: '',
-      intro: faker.lorem.text(),
-      is_admin: false,
+      introduction: faker.lorem.text(),
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date()
     }, {
@@ -63,8 +63,8 @@ module.exports = {
       nickname: faker.name.findName(),
       avatar: `https://loremflickr.com/320/240/boy,girl/?random=${Math.random() * 100}`,
       cover_photo: '',
-      intro: faker.lorem.text(),
-      is_admin: false,
+      introduction: faker.lorem.text(),
+      role: 'user',
       created_at: new Date(),
       updated_at: new Date()
     }], {})
