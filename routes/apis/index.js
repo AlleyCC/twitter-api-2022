@@ -22,7 +22,7 @@ router.get('/users/:id/likes', authenticated, userController.getLikes)
 router.get('/users/:id/followings', authenticated, userController.getFollowings)
 router.get('/users/:id/followers', authenticated, userController.getFollowers)
 router.get('/users/:id', authenticated, userController.getUser)
-router.put('/users/:id', authenticated, userController.putUser)
+// router.put('/users/:id', authenticated, userController.putUser)
 
 // Tweets
 router.get('/tweets/:id/replies', authenticated, tweetController.getReplies)
