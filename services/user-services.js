@@ -229,7 +229,6 @@ const userServices = {
           updatedAt: r.updatedAt,
           likedCount: r.likedCount,
           repliedCount: r.repliedCount,
-          description: r.Tweet.description,
           userData: {
             id: r.Tweet.User.id,
             name: r.Tweet.User.name,
