@@ -1,0 +1,1216 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Twitter",
+    "description": "Twitter API"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/admin/users": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Admin_user"
+            }
+          }
+        }
+      }},
+    "/api/admin/signin": {  
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "管理者登入後台",
+        "requestBody": {
+          "description": "後台登入入口",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Admin_user"
+              }
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Admin_signin"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+     "/api/admin/tweets/{tweet_id}": {  
+      "delete": {
+        "tags": [
+          "Admin"
+        ],
+        "summary": "管理者刪除任一推文",
+        "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Admin_tweet"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/admin/tweets": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Admin_tweet"
+            }
+          }
+        }
+    }},
+    "/api/users/signin": {  
+    "post": {
+      "tags": [
+        "User"
+      ],
+      "summary": "使用者登入前台",
+      "requestBody": {
+        "description": "前台登入入口",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/User_signin"
+            }
+          }
+        }
+      },
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "成功登入",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/users": {  
+    "post": {
+      "tags": [
+        "User"
+      ],
+      "summary": "使用者註冊",
+      "requestBody": {
+        "description": "前台登入入口",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/User_signup"
+            }
+          }
+        }
+      },
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "成功註冊",
+          "schema": {
+            "$ref": "#/definitions/User_signup_success"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    },
+    "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "瀏覽當前帳戶的個人資訊頁面",
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Admin_tweet"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}/tweets": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User_tweets"
+            }
+          }
+        }
+      }
+    },
+    "/api/users/{user_id)": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "瀏覽單一使用者資料",
+        "parameters": {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        },
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        }
+      }
+    }},
+    "/api/users/{user_id}/account": {
+      "put": {
+      "tags": [
+        "User"
+      ],
+      "summary": "使用者帳戶設定",
+      "requestBody": {
+        "description": "使用者帳戶設定",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/User_setting"
+            }
+          }
+        }
+      },
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/User"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/users/{user_id}/replied_tweets": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "取得單一使用者回覆過的推文",
+        "parameters": {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User_repliedTweet"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}/followers": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "取得單一使用者追蹤者清單",
+        "parameters": {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User_followers"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}/likes": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "取得單一使用者按過Like的推文清單",
+        "parameters": {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User_likedTweets"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}/followings": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "取得單一使用者的正在追蹤中清單",
+        "parameters": {
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/User_followings"
+            }
+          },
+          "400": {
+            "description": "Failed. Bad post data."
+          }
+        }
+      }
+    },
+    "/api/users/{user_id}": {
+      "put": {
+      "tags": [
+        "User"
+      ],
+      "summary": "使用者編輯個人資料",
+      "requestBody": {
+        "description": "使用者可以編輯個人化資料(頭像、封面照片、個人簡介)",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/User_profileEdit"
+            }
+          }
+        }
+      },
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "更新成功",
+          "schema": {
+            "$ref": "#/definitions/User_profileEdit"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/tweets/{tweet_id}": {
+      "get": {
+        "tags": [
+          "Tweet"
+        ],
+        "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Tweet"
+            }
+          }
+        }
+    }
+    },
+    "/api/tweets": {
+      "get": {
+        "tags": [
+          "Tweet"
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Tweet"
+            }
+          }
+        }
+      },
+      "post": {
+      "tags": [
+        "Tweet"
+      ],
+      "summary": "新增推文",
+      "produces": [
+        "application/json"
+      ],
+      "requestBody": {
+        "description": "新增一則推文",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/Tweet_create"
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Tweet_createResult"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/tweets/{tweet_id}/replies": {
+      "get": {
+        "tags": [
+          "Tweet"
+        ],
+        "summary": "瀏覽單一推文的所有回覆",
+        "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Tweet_replies"
+            }
+          }
+        }
+      },
+      "post": {
+      "tags": [
+        "Tweet"
+      ],
+      "summary": "新增回覆至單一推文",
+      "requestBody": {
+        "description": "新增回覆至單一推文",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/definitions/Tweet_reply"
+            }
+          }
+        }
+      },
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Tweet_replyResult"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/tweets/{tweet_id}/like": {
+      "post": {
+      "tags": [
+        "Tweet"
+      ],
+      "summary": "將一則推文加入至喜歡的推文清單中",
+       "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Tweet_like"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/tweets/{tweet_id}/unlike": {
+      "post": {
+      "tags": [
+        "Tweet"
+      ],
+      "summary": "將一則推文自喜歡的推文清單中移除",
+       "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Tweet_like"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api//followships/top": {
+      "get": {
+        "tags": [
+          "Followship"
+        ],
+        "summary": "瀏覽單一推文的所有回覆",
+        "parameters": {
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "schema": { 
+            "type": "integer"
+        }},
+        "responses": {
+          "200": {
+            "description": "success",
+            "schema": {
+              "$ref": "#/definitions/Tweet_replies"
+            }
+          }
+        }
+      }
+    }
+    
+  },
+  "definitions": {
+    "Admin_user": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 2
+        },
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "email": {
+          "type": "string",
+          "example": "user1@example.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2a$10$LSNMAELC5th0qUboC1MBE.T9JQCvM6M5ugD8/MweVeT7YLk2ICCOS"
+        },
+        "introduction": {
+          "type": "string",
+          "example": "Aut porro soluta iusto rerum quis ipsa consequatur libero eum. Fuga ut id ad."
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudCI6InJvb3QiLCJuYW1lIjoicm9vdCIsImVtYWlsIjoicm9vdEBleGFtcGxlLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJyb2xlIjoiYWRtaW4iLCJhdmF0YXIiOm51bGwsImNvdmVyUGhvdG8iOm51bGwsImludHJvZHVjdGlvbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wOVQwNjoyMjozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xMFQwNjoyMjozNS4wMDBaIiwiaWF0IjoxNjY1Njg3MTU4LCJleHAiOjE2NjgyNzkxNTh9.iGllEkWlB00ct4nsEfKE3_Y16ZF8VQV9KVrO26MV7fo"
+        }
+      }
+    },
+    "Admin_tweet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "decription": {
+          "type": "string",
+          "example": "Voluptatem veritatis ipsum veniam maxime vel rerum aut veniam labore. Cupiditate cupiditate deleniti quod eligendi nam.  Doloribus nihil et."
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 6
+        }
+      }  
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudCI6InJvb3QiLCJuYW1lIjoicm9vdCIsImVtYWlsIjoicm9vdEBleGFtcGxlLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJyb2xlIjoiYWRtaW4iLCJhdmF0YXIiOm51bGwsImNvdmVyUGhvdG8iOm51bGwsImludHJvZHVjdGlvbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wOVQwNjoyMjozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xMFQwNjoyMjozNS4wMDBaIiwiaWF0IjoxNjY1Njg3MTU4LCJleHAiOjE2NjgyNzkxNTh9.iGllEkWlB00ct4nsEfKE3_Y16ZF8VQV9KVrO26MV7fo"
+        },
+        "user": {
+          "id": {
+            "type": "integer",
+            "example": 24
+          },
+          "account": {
+            "type": "string",
+            "example": "Kris"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "role": {
+            "type": "string",
+            "example": "user"
+          },
+          "introduction": {
+            "type": "string",
+            "example": "Aut porro soluta iusto rerum quis ipsa conse"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          },
+          "coverPhoto": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          }
+        }
+      }  
+    },
+    "User_signin": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "example": "test_6_account"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    },
+    "User_signup": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "test_6"
+        },
+        "account": {
+          "type": "string",
+          "example": "test_6_account"
+        },
+        "email": {
+          "type": "string",
+          "example": "test_6@test.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345678"
+        },
+        "checkPassword": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    },
+    "User_signup_success": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 9
+        },
+        "name": {
+          "type": "string",
+          "example": "test_6"
+        },
+        "account": {
+          "type": "string",
+          "example": "test_6_account"
+        },
+        "email": {
+          "type": "string",
+          "example": "test_6@test.com"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2a$10$PCiblHGYMFeoScTqPspJi.AmpxNSzjv.F9tOnT4JoX/VZ3SGvbWha"
+        },
+        "role": {
+          "type": "string",
+          "example": "user"
+        }
+      }
+    },
+    "User_tweets": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "userData": {
+          "id": {
+            "type": "integer",
+            "example": 24
+          },
+          "account": {
+            "type": "string",
+            "example": "Kris"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          },
+          "coverPhoto": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          }
+        },
+        "description": {
+          "type": "string",
+          "example": "qwrev sdhju"
+        },
+        "repliedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "likedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "isLiked": {
+          "type": "boolean",
+          "example": false
+        }
+      }  
+    },
+    "User_setting": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "password": {
+          "type": "string",
+          "example": "12345678"
+        },
+        "checkPassword": {
+          "type": "string",
+          "example": "12345678"
+        }
+      }
+    },
+    "User_repliedTweet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "comment": {
+          "type": "string",
+          "example": "ut pariatur labore"
+        },
+        "userData": {
+          "id": {
+            "type": "integer",
+            "example": 24
+          },
+          "account": {
+            "type": "string",
+            "example": "Kris"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          }
+        },
+        "TweetId": {
+          "type": "integer",
+          "example": 1
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 5
+        }
+      }  
+    },
+    "User_followers": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 3
+        },
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "avata": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        },
+        "introduction": {
+          "type": "string",
+          "example": "loram ipsum"
+        },
+        "isFollowed": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "User_likedTweet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "userData": {
+          "id": {
+            "type": "integer",
+            "example": 24
+          },
+          "account": {
+            "type": "string",
+            "example": "Kris"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          }
+        },
+        "TweetId": {
+          "type": "integer",
+          "example": 24
+        },
+        "description": {
+          "type": "string",
+          "example": "qwrev sdhju"
+        },
+        "repliedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "likedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "isLiked": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "User_followings": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 3
+        },
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "avata": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        },
+        "introduction": {
+          "type": "string",
+          "example": "loram ipsum"
+        },
+        "isFollowed": {
+          "type": "boolean",
+          "example": false
+        }
+      }
+    },
+    "User_profileEdit": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "introduction": {
+          "type": "string",
+          "example": "Aut porro soluta iusto rerum quis ipsa conse"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        },
+        "coverPhoto": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        }
+      }  
+    },
+    "Tweet": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "description": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 3
+        },
+        "likedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "repliedCount": {
+          "type": "integer",
+          "example": 3
+        },
+        "User": {
+          "id": {
+          "type": "integer",
+          "example": 2
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "account": {
+            "type": "string",
+            "example": "user1"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/f69lQkH.png"
+          }
+        },
+        "Likes": {
+          "id": {
+            "type": "integer",
+            "example": 2
+          },
+          "UserId": {
+            "type": "integer",
+            "example": 2
+          },
+          "TweetId": {
+            "type": "integer",
+            "example": 2
+          }
+        },
+        "Replies": {
+          "id": {
+          "type": "integer",
+          "example": 2
+          },
+          "comment": {
+            "type": "string",
+            "example": "user1"
+          },
+          "UserId": {
+          "type": "integer",
+          "example": 2
+          },
+          "TweetId": {
+          "type": "integer",
+          "example": 2
+          },
+          "User": {
+            "id": {
+            "type": "integer",
+            "example": 2
+            },
+            "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "account": {
+            "type": "string",
+            "example": "user1"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/f69lQkH.png"
+          }
+
+          }
+        }
+      }  
+    },
+    "Tweet_replies": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 24
+        },
+        "comment": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 2
+        },
+        "TweetId": {
+          "type": "integer",
+          "example": 2
+        },
+        "User": {
+          "id": {
+            "type": "integer",
+            "example": 2
+          },
+          "account": {
+            "type": "string",
+            "example": "Karen"
+          },
+          "name": {
+            "type": "string",
+            "example": "user1"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "https://i.imgur.com/ozBRFea.png"
+          }
+        }
+        
+      }  
+    },
+    "Tweet_reply": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "example": "hello world"
+        }
+      }
+    },
+    "Tweet_replyResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 12
+        },
+        "comment": {
+          "type": "string",
+          "example": "hello world"
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 3
+        },
+        "TweetId": {
+          "type": "integer",
+          "example": 12
+        }
+      }
+    },
+    "Tweet_like": {
+      "type": "object",
+      "properties": {
+         "id": {
+          "type": "integer",
+          "example": 12
+        },
+         "TweetId": {
+          "type": "integer",
+          "example": 12
+        },
+         "UserId": {
+          "type": "integer",
+          "example": 12
+        }
+      }
+    },
+    "Tweet_create": {
+      "type": "object",
+      "properties": {
+         "description": {
+            "type": "string",
+            "example": "hello world"
+        }
+      }
+    },
+    "Tweet_createResult": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 12
+        },
+        "UserId": {
+          "type": "integer",
+          "example": 2
+        },
+        "description": {
+            "type": "string",
+            "example": "hello world"
+        }
+      }
+    }
+  }
+}

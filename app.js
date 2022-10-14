@@ -1,6 +1,9 @@
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+const swaggerUI = require('swagger-ui-express')
+const swaggerJSDoc = require('swagger-jsdoc')
+const swaggerDocument = require('./swagger')
 
 const path = require('path')
 const express = require('express')
@@ -24,9 +27,25 @@ app.use(passport.initialize())
 // };
 
 app.use(cors())
+// const options = {
+//   definition: {
+//     openapi: '3.0.3',
+//     info: {
+//       title: 'Twitter API',
+//       version: '1.0.0'
+//     },
+//     servers: [
+//       {
+//         url: 'http://localhost:3000'
+//       }
+//     ],
+//     apis: ['./routes']
+//   }
+// }
+// const swaggerSpec = swaggerJSDoc(options)
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/api', apis)
 
-app.get('/', (req, res) => res.send('This is simple twitter api'))
 app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`))
 
 module.exports = app
