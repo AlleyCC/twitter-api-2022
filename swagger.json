@@ -187,6 +187,7 @@
         "tags": [
           "User"
         ],
+        "summary": "取得單一使用者所有推文",
         "responses": {
           "200": {
             "description": "success",
@@ -407,6 +408,7 @@
         "tags": [
           "Tweet"
         ],
+        "summary": "瀏覽單一推文",
         "parameters": {
           "name": "tweet_id",
           "in": "path",
@@ -429,6 +431,7 @@
         "tags": [
           "Tweet"
         ],
+        "summary": "瀏覽所有推文",
         "responses": {
           "200": {
             "description": "success",
@@ -582,28 +585,65 @@
       }
     }
     },
-    "/api//followships/top": {
+    "/api/followships/top": {
       "get": {
         "tags": [
           "Followship"
         ],
-        "summary": "瀏覽單一推文的所有回覆",
-        "parameters": {
-          "name": "tweet_id",
-          "in": "path",
-          "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+        "summary": "取得追蹤數前10名的使用者清單",
         "responses": {
           "200": {
             "description": "success",
             "schema": {
-              "$ref": "#/definitions/Tweet_replies"
+              "$ref": "#/definitions/Followship"
             }
           }
         }
       }
+    },
+    "/api/followships": {
+      "post": {
+      "tags": [
+        "Followship"
+      ],
+      "summary": "建立追蹤關係",
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Followship"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
+    },
+    "/api/followships/{following_id}": {
+      "delete": {
+      "tags": [
+        "Followship"
+      ],
+      "summary": "建立追蹤關係",
+      "produces": [
+        "application/json"
+      ],
+      "responses": {
+        "200": {
+          "description": "success",
+          "schema": {
+            "$ref": "#/definitions/Followship"
+          }
+        },
+        "400": {
+          "description": "Failed. Bad post data."
+        }
+      }
+    }
     }
     
   },
@@ -1209,6 +1249,27 @@
         "description": {
             "type": "string",
             "example": "hello world"
+        }
+      }
+    },
+    "Followship": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "example": 2
+        },
+        "FollowerId": {
+          "type": "integer",
+          "example": 2
+        },
+        "FollowingId": {
+          "type": "integer",
+          "example": 2
+        },
+        "isFollowed": {
+            "type": "boolean",
+            "example": true
         }
       }
     }
