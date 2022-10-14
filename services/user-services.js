@@ -97,12 +97,12 @@ const userServices = {
       }
     })
       .then(user => {
-        if (!user) {
-          const err = new Error("User didn't exist!")
-          err.status = 404
-          throw err
+        if (!user) throw new Error("User didn't exist!")
+        const { ...userData } = {
+          ...user.toJSON(),
+          isFollowed: user.Followers.some(user => user.id === getUser(req).dataValues.id)
         }
-        return cb(null, user)
+        return cb(null, userData)
       })
       .catch(err => cb(err))
   },
@@ -307,6 +307,7 @@ const userServices = {
       }),
       Followship.findAll({
         where: { followerId: getUser(req).dataValues.id },
+        order: [['createdAt', 'DESC']],
         raw: true,
         nest: true
       })
@@ -320,7 +321,8 @@ const userServices = {
           name: f.name,
           avatar: f.avatar,
           introduction: f.introduction,
-          isFollowed: currentUserFollowing.some(id => id === f.id)
+          isFollowed: currentUserFollowing.some(id => id === f.id),
+          createdAt: f.createdAt
         }))
         return cb(null, userFollowingData)
       })
@@ -334,6 +336,7 @@ const userServices = {
       }),
       Followship.findAll({
         where: { followerId: getUser(req).dataValues.id },
+        order: [['createdAt', 'DESC']],
         raw: true,
         nest: true
       })
@@ -347,7 +350,8 @@ const userServices = {
           name: f.name,
           avatar: f.avatar,
           introduction: f.introduction,
-          isFollowed: currentUserFollowing.some(id => id === f.id)
+          isFollowed: currentUserFollowing.some(id => id === f.id),
+          createdAt: f.createdAt
         }))
         return cb(null, userFollowerData)
       })
