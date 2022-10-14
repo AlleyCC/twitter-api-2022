@@ -97,12 +97,12 @@ const userServices = {
       }
     })
       .then(user => {
-        if (!user) {
-          const err = new Error("User didn't exist!")
-          err.status = 404
-          throw err
+        if (!user) throw new Error("User didn't exist!")
+        const { ...userData } = {
+          ...user.toJSON(),
+          isFollowed: user.Followers.some(user => user.id === getUser(req).dataValues.id)
         }
-        return cb(null, user)
+        return cb(null, userData)
       })
       .catch(err => cb(err))
   },
