@@ -129,10 +129,7 @@ const userServices = {
           })
             .then(confirmUser => {
               // db已有重複資料
-              if (confirmUser.length > 1) {
-                throw new Error('Account or email has already exist.')
-              // db除了user的舊資料，未有重複資料
-              } else {
+              if (!confirmUser.length) {
                 return bcrypt.hash(password, 10)
                   .then(hash => {
                     user.update({
@@ -145,7 +142,28 @@ const userServices = {
                   .then(updatedUser => cb(null, updatedUser))
                   .catch(err => cb(err))
               }
-            })
+              if (confirmUser.length > 1) {
+                throw new Error('Account or email has already exist.')
+              // db除了user的舊資料，未有重複資料
+              } else if (confirmUser.length === 1) {
+                const accountCheck = confirmUser[0].dataValues.account
+                const userCheckId = confirmUser[0].dataValues.id
+                const emailCheck = confirmUser[0].dataValues.email
+                if ((accountCheck === account || emailCheck === email) && (userCheckId !== UserId)) throw new Error('Account or email has already exist.')
+                return bcrypt.hash(password, 10)
+                  .then(hash => {
+                    user.update({
+                      name,
+                      email,
+                      account,
+                      password: hash
+                    })
+                  })
+                  .then(updatedUser => cb(null, updatedUser))
+                  .catch(err => cb(err))
+              }
+            }
+            )
             .catch(err => cb(err))
           // 如果account、email皆未更動
         } else {
@@ -289,6 +307,7 @@ const userServices = {
       }),
       Followship.findAll({
         where: { followerId: getUser(req).dataValues.id },
+        order: [['createdAt', 'DESC']],
         raw: true,
         nest: true
       })
@@ -302,7 +321,8 @@ const userServices = {
           name: f.name,
           avatar: f.avatar,
           introduction: f.introduction,
-          isFollowed: currentUserFollowing.some(id => id === f.id)
+          isFollowed: currentUserFollowing.some(id => id === f.id),
+          createdAt: f.createdAt
         }))
         return cb(null, userFollowingData)
       })
@@ -316,6 +336,7 @@ const userServices = {
       }),
       Followship.findAll({
         where: { followerId: getUser(req).dataValues.id },
+        order: [['createdAt', 'DESC']],
         raw: true,
         nest: true
       })
@@ -329,7 +350,8 @@ const userServices = {
           name: f.name,
           avatar: f.avatar,
           introduction: f.introduction,
-          isFollowed: currentUserFollowing.some(id => id === f.id)
+          isFollowed: currentUserFollowing.some(id => id === f.id),
+          createdAt: f.createdAt
         }))
         return cb(null, userFollowerData)
       })
