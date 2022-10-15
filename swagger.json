@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0.0",
     "title": "Twitter",
-    "description": "Twitter API"
+    "description": "為Twitter專案提供API文件，實作過程方便前後端溝通，文件內容提供詳細各api回傳的資料格式與內容。"
   },
   "consumes": [
     "application/json"
@@ -17,6 +17,7 @@
         "tags": [
           "Admin"
         ],
+        "summary": "管理者可從後台取得所有使用者清單",
         "responses": {
           "200": {
             "description": "success",
@@ -59,19 +60,23 @@
         }
       }
     },
-     "/api/admin/tweets/{tweet_id}": {  
+    "/api/admin/tweets/{tweet_id}": {  
       "delete": {
         "tags": [
           "Admin"
         ],
         "summary": "管理者刪除任一推文",
-        "parameters": {
+        "parameters": [{
           "name": "tweet_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+      }],
         "produces": [
           "application/json"
         ],
@@ -93,6 +98,7 @@
         "tags": [
           "Admin"
         ],
+        "summary": "管理者可從後台取得所有推文清單",
         "responses": {
           "200": {
             "description": "success",
@@ -188,6 +194,17 @@
           "User"
         ],
         "summary": "取得單一使用者所有推文",
+        "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "responses": {
           "200": {
             "description": "success",
@@ -204,13 +221,17 @@
           "User"
         ],
         "summary": "瀏覽單一使用者資料",
-        "parameters": {
+        "parameters": [{
           "name": "user_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        },
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "responses": {
           "200": {
             "description": "success",
@@ -220,13 +241,24 @@
           }
         }
       }
-    }},
+    },
     "/api/users/{user_id}/account": {
       "put": {
       "tags": [
         "User"
       ],
       "summary": "使用者帳戶設定",
+      "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
       "requestBody": {
         "description": "使用者帳戶設定",
         "required": true,
@@ -260,13 +292,17 @@
           "User"
         ],
         "summary": "取得單一使用者回覆過的推文",
-        "parameters": {
+        "parameters": [{
           "name": "user_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "produces": [
           "application/json"
         ],
@@ -289,13 +325,17 @@
           "User"
         ],
         "summary": "取得單一使用者追蹤者清單",
-        "parameters": {
+        "parameters": [{
           "name": "user_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "produces": [
           "application/json"
         ],
@@ -318,13 +358,17 @@
           "User"
         ],
         "summary": "取得單一使用者按過Like的推文清單",
-        "parameters": {
+        "parameters": [{
           "name": "user_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "produces": [
           "application/json"
         ],
@@ -347,13 +391,17 @@
           "User"
         ],
         "summary": "取得單一使用者的正在追蹤中清單",
-        "parameters": {
+        "parameters": [{
           "name": "user_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "produces": [
           "application/json"
         ],
@@ -376,6 +424,17 @@
         "User"
       ],
       "summary": "使用者編輯個人資料",
+      "parameters": [{
+          "name": "user_id",
+          "in": "path",
+          "required": true,
+          "description": "The user ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
       "requestBody": {
         "description": "使用者可以編輯個人化資料(頭像、封面照片、個人簡介)",
         "required": true,
@@ -409,13 +468,17 @@
           "Tweet"
         ],
         "summary": "瀏覽單一推文",
-        "parameters": {
+        "parameters": [{
           "name": "tweet_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "responses": {
           "200": {
             "description": "success",
@@ -479,13 +542,17 @@
           "Tweet"
         ],
         "summary": "瀏覽單一推文的所有回覆",
-        "parameters": {
+        "parameters": [{
           "name": "tweet_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
         "responses": {
           "200": {
             "description": "success",
@@ -500,6 +567,17 @@
         "Tweet"
       ],
       "summary": "新增回覆至單一推文",
+      "parameters": [{
+          "name": "tweet_id",
+          "in": "path",
+          "required": true,
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
       "requestBody": {
         "description": "新增回覆至單一推文",
         "required": true,
@@ -533,13 +611,17 @@
         "Tweet"
       ],
       "summary": "將一則推文加入至喜歡的推文清單中",
-       "parameters": {
+      "parameters": [{
           "name": "tweet_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
       "produces": [
         "application/json"
       ],
@@ -562,13 +644,17 @@
         "Tweet"
       ],
       "summary": "將一則推文自喜歡的推文清單中移除",
-       "parameters": {
+      "parameters": [{
           "name": "tweet_id",
           "in": "path",
           "required": true,
-          "schema": { 
-            "type": "integer"
-        }},
+          "description": "The tweet ID",
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "minimum": 1
+        }],
       "produces": [
         "application/json"
       ],
@@ -629,6 +715,17 @@
         "Followship"
       ],
       "summary": "建立追蹤關係",
+      "parameters": [{
+        "name": "following_id",
+        "in": "path",
+        "required": true,
+        "description": "The following ID",
+        "schema": {
+            "type": "integer",
+            "format": "int64"
+          },
+        "minimum": 1
+      }],
       "produces": [
         "application/json"
       ],
@@ -645,7 +742,6 @@
       }
     }
     }
-    
   },
   "definitions": {
     "Admin_user": {
