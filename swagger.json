@@ -21,12 +21,36 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Admin_user"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Admin_user"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "查詢不到相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
-      }},
+    }},
     "/api/admin/signin": {  
       "post": {
         "tags": [
@@ -49,13 +73,26 @@
         ],
         "responses": {
           "200": {
-            "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Admin_signin"
+            "description": "管理者登入成功",
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Admin_signin"
+                }
+              }
+              
             }
+            
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "管理者登入失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400_admin"
+                }
+              }
+            }
           }
         }
       }
@@ -83,12 +120,33 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Admin_tweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Success"
+            }
+              }
             }
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -102,8 +160,32 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Admin_tweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Admin_tweet"
+                }
+              }
+            } 
+          },
+          "400": {
+            "description": "error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -131,12 +213,34 @@
       "responses": {
         "200": {
           "description": "成功登入",
-          "schema": {
-            "$ref": "#/definitions/User"
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User"
           }
+              }
+            }
+          
         },
         "400": {
-          "description": "Failed. Bad post data."
+          "description": "查詢無相關資料",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_400"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -163,13 +267,25 @@
       ],
       "responses": {
         "200": {
-          "description": "成功註冊",
-          "schema": {
-            "$ref": "#/definitions/User_signup_success"
+          "description": "註冊成功",
+          "content": {
+            "application/json": {
+              "schema": {
+              "$ref": "#/definitions/User_signup_success"
           }
+            }
+          }
+          
         },
         "400": {
-          "description": "Failed. Bad post data."
+          "description": "註冊失敗",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_400"
+              }
+            }
+          }
         }
       }
     },
@@ -181,8 +297,32 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Admin_tweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -208,8 +348,32 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_tweets"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User_tweets"
+              }
+              }
+            }  
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -235,8 +399,33 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User"
+                }
+              }
+            }
+            
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -276,13 +465,34 @@
       "responses": {
         "200": {
           "description": "success",
-          "schema": {
-            "$ref": "#/definitions/User"
-          }
+          "content": {
+            "application/json": {
+              "schema": {
+              "$ref": "#/definitions/Success"
+              }
+            }
+          } 
         },
         "400": {
-          "description": "Failed. Bad post data."
-        }
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
+          }
       }
     }
     },
@@ -309,12 +519,34 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_repliedTweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User_repliedTweet"
+              }
+              }
             }
+            
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -342,12 +574,34 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_followers"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User_followers"
+                }
+              }
             }
+            
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -375,12 +629,33 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_likedTweets"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/User_likedTweet"
+                }
+              }
             }
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -408,12 +683,34 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/User_followings"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User_followings"
+                }
+              }
             }
+            
           },
           "400": {
-            "description": "Failed. Bad post data."
+            "description": "資料庫內查無資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -441,7 +738,7 @@
         "content": {
           "application/json": {
             "schema": {
-              "$ref": "#/definitions/User_profileEdit"
+              "$ref": "#/definitions/User_profileEditInput"
             }
           }
         }
@@ -452,12 +749,33 @@
       "responses": {
         "200": {
           "description": "更新成功",
-          "schema": {
-            "$ref": "#/definitions/User_profileEdit"
-          }
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/User_profileEdit"
+                }
+              }
+            }
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -482,8 +800,33 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Tweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Tweet"
+                }
+              }
+            }
+            
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -498,8 +841,33 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Tweet"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Tweet"
+                }
+              }
+            }
+            
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -526,12 +894,33 @@
       "responses": {
         "200": {
           "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Tweet_createResult"
-          }
+          "content": {
+            "application/json": {
+              "schema": {
+              "$ref": "#/definitions/Tweet_createResult"
+              }
+            }
+            }
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -556,8 +945,32 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Tweet_replies"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Tweet_replies"
+                }
+              }
+            } 
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -594,13 +1007,34 @@
       ],
       "responses": {
         "200": {
-          "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Tweet_replyResult"
+          "description": "新增回覆成功",
+          "content": {
+            "application/json": {
+              "schema": {
+              "$ref": "#/definitions/Tweet_replyResult"
+              }
+            }
           }
         },
         "400": {
-          "description": "Failed. Bad post data."
+          "description": "新增回覆失敗",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_400_admin"
+              }
+            }
+          }
+        },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -627,13 +1061,34 @@
       ],
       "responses": {
         "200": {
-          "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Tweet_like"
-          }
+          "description": "新增成功",
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Tweet_like"
+                }
+              }
+            }
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "新增失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400_admin"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -661,12 +1116,33 @@
       "responses": {
         "200": {
           "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Tweet_like"
-          }
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Success"
+                }
+              }
+            }
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "操作失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400_admin"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -680,8 +1156,32 @@
         "responses": {
           "200": {
             "description": "success",
-            "schema": {
-              "$ref": "#/definitions/Followship"
+            "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Followship"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "權限不足",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
             }
           }
         }
@@ -699,12 +1199,34 @@
       "responses": {
         "200": {
           "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Followship"
-          }
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Followship"
+                }
+              }
+            }
+          
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "資料庫內查無相關資料",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -714,7 +1236,7 @@
       "tags": [
         "Followship"
       ],
-      "summary": "建立追蹤關係",
+      "summary": "移除追蹤關係",
       "parameters": [{
         "name": "following_id",
         "in": "path",
@@ -731,13 +1253,34 @@
       ],
       "responses": {
         "200": {
-          "description": "success",
-          "schema": {
-            "$ref": "#/definitions/Followship"
-          }
+          "description": "操作成功",
+          "content": {
+              "application/json": {
+                "schema": {
+                "$ref": "#/definitions/Followship"
+                }
+              }
+            }
         },
         "400": {
-          "description": "Failed. Bad post data."
+            "description": "操作失敗",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_400_admin"
+                }
+              }
+            }
+          },
+        "401": {
+          "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -794,6 +1337,23 @@
         }
       }  
     },
+    "Admin_signin": {
+      "type": "object",
+      "properties": {
+        "account": {
+          "type": "string",
+          "example": "Kris"
+        },
+        "password": {
+          "type": "string",
+          "example": "$2a$10$LSNMAELC5th0qUboC1MBE.T9JQCvM6M5ugD8/MweVeT7YLk2ICCOS"
+        },
+        "token": {
+          "type": "string",
+          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudCI6InJvb3QiLCJuYW1lIjoicm9vdCIsImVtYWlsIjoicm9vdEBleGFtcGxlLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJyb2xlIjoiYWRtaW4iLCJhdmF0YXIiOm51bGwsImNvdmVyUGhvdG8iOm51bGwsImludHJvZHVjdGlvbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wOVQwNjoyMjozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xMFQwNjoyMjozNS4wMDBaIiwiaWF0IjoxNjY1Njg3MTU4LCJleHAiOjE2NjgyNzkxNTh9.iGllEkWlB00ct4nsEfKE3_Y16ZF8VQV9KVrO26MV7fo"
+        }
+      }
+    },
     "User": {
       "type": "object",
       "properties": {
@@ -801,39 +1361,39 @@
           "type": "integer",
           "example": 24
         },
-        "token": {
-          "type": "string",
-          "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiYWNjb3VudCI6InJvb3QiLCJuYW1lIjoicm9vdCIsImVtYWlsIjoicm9vdEBleGFtcGxlLmNvbSIsIm5pY2tuYW1lIjpudWxsLCJyb2xlIjoiYWRtaW4iLCJhdmF0YXIiOm51bGwsImNvdmVyUGhvdG8iOm51bGwsImludHJvZHVjdGlvbiI6bnVsbCwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wOVQwNjoyMjozNS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0xMFQwNjoyMjozNS4wMDBaIiwiaWF0IjoxNjY1Njg3MTU4LCJleHAiOjE2NjgyNzkxNTh9.iGllEkWlB00ct4nsEfKE3_Y16ZF8VQV9KVrO26MV7fo"
-        },
         "user": {
-          "id": {
+          "type": "object",
+          "properties": {
+            "id": {
             "type": "integer",
             "example": 24
-          },
-          "account": {
-            "type": "string",
-            "example": "Kris"
-          },
-          "name": {
-            "type": "string",
-            "example": "user1"
-          },
-          "role": {
-            "type": "string",
-            "example": "user"
-          },
-          "introduction": {
-            "type": "string",
-            "example": "Aut porro soluta iusto rerum quis ipsa conse"
-          },
-          "avatar": {
-            "type": "string",
-            "example": "https://i.imgur.com/ozBRFea.png"
-          },
-          "coverPhoto": {
-            "type": "string",
-            "example": "https://i.imgur.com/ozBRFea.png"
+            },
+            "account": {
+              "type": "string",
+              "example": "Kris"
+            },
+            "name": {
+              "type": "string",
+              "example": "user1"
+            },
+            "role": {
+              "type": "string",
+              "example": "user"
+            },
+            "introduction": {
+              "type": "string",
+              "example": "Aut porro soluta iusto rerum quis ipsa conse"
+            },
+            "avatar": {
+              "type": "string",
+              "example": "https://i.imgur.com/ozBRFea.png"
+            },
+            "coverPhoto": {
+              "type": "string",
+              "example": "https://i.imgur.com/ozBRFea.png"
+            }
           }
+          
         }
       }  
     },
@@ -1010,7 +1570,7 @@
     "User_followers": {
       "type": "object",
       "properties": {
-        "id": {
+        "follower_id": {
           "type": "integer",
           "example": 3
         },
@@ -1022,7 +1582,7 @@
           "type": "string",
           "example": "user1"
         },
-        "avata": {
+        "avatar": {
           "type": "string",
           "example": "https://i.imgur.com/ozBRFea.png"
         },
@@ -1044,21 +1604,24 @@
           "example": 24
         },
         "userData": {
-          "id": {
-            "type": "integer",
-            "example": 24
-          },
-          "account": {
-            "type": "string",
-            "example": "Kris"
-          },
-          "name": {
-            "type": "string",
-            "example": "user1"
-          },
-          "avatar": {
-            "type": "string",
-            "example": "https://i.imgur.com/ozBRFea.png"
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 24
+            },
+            "account": {
+              "type": "string",
+              "example": "Kris"
+            },
+            "name": {
+              "type": "string",
+              "example": "user1"
+            },
+            "avatar": {
+              "type": "string",
+              "example": "https://i.imgur.com/ozBRFea.png"
+            }
           }
         },
         "TweetId": {
@@ -1086,7 +1649,7 @@
     "User_followings": {
       "type": "object",
       "properties": {
-        "id": {
+        "following_id": {
           "type": "integer",
           "example": 3
         },
@@ -1111,6 +1674,27 @@
           "example": false
         }
       }
+    },
+    "User_profileEditInput": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "user1"
+        },
+        "introduction": {
+          "type": "string",
+          "example": "Aut porro soluta iusto rerum quis ipsa conse"
+        },
+        "avatar": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        },
+        "coverPhoto": {
+          "type": "string",
+          "example": "https://i.imgur.com/ozBRFea.png"
+        }
+      }  
     },
     "User_profileEdit": {
       "type": "object",
@@ -1165,21 +1749,24 @@
           "example": 3
         },
         "User": {
-          "id": {
-          "type": "integer",
-          "example": 2
-          },
-          "name": {
-            "type": "string",
-            "example": "user1"
-          },
-          "account": {
-            "type": "string",
-            "example": "user1"
-          },
-          "avatar": {
-            "type": "string",
-            "example": "https://i.imgur.com/f69lQkH.png"
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 2
+            },
+            "name": {
+              "type": "string",
+              "example": "user1"
+            },
+            "account": {
+              "type": "string",
+              "example": "user1"
+            },
+            "avatar": {
+              "type": "string",
+              "example": "https://i.imgur.com/f69lQkH.png"
+            }
           }
         },
         "Likes": {
@@ -1366,6 +1953,71 @@
         "isFollowed": {
             "type": "boolean",
             "example": true
+        }
+      }
+    },
+    "Error_400": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "message": {
+          "type": "string",
+          "example": "資料庫內無相關資料"
+        }
+      }
+    },
+    "Error_401": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "message": {
+          "type": "string",
+          "example": "權限不足，請提供正確的token。"
+        }
+      }
+    },
+    "Error_403": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "message": {
+          "type": "string",
+          "example": "帳戶或密碼錯誤"
+        }
+      }
+    },
+    "Error_400_admin": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "message": {
+          "type": "string",
+          "example": "輸入的parameters或body資料有誤"
+        }
+      }
+    },
+    "Success": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "success"
+        },
+        "message": {
+          "type": "string",
+          "example": "操作成功"
         }
       }
     }
