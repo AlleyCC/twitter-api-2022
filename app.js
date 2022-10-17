@@ -21,28 +21,9 @@ app.use('/upload', express.static(path.join(__dirname, 'upload')))
 app.use(express.json())
 app.use(methodOverride('_method'))
 app.use(passport.initialize())
-// use helpers.getUser(req) to replace req.user
-// function authenticated (req, res, next) {
-//   // passport.authenticate('jwt', { ses...
-// };
 
 app.use(cors())
-// const options = {
-//   definition: {
-//     openapi: '3.0.3',
-//     info: {
-//       title: 'Twitter API',
-//       version: '1.0.0'
-//     },
-//     servers: [
-//       {
-//         url: 'http://localhost:3000'
-//       }
-//     ],
-//     apis: ['./routes']
-//   }
-// }
-// const swaggerSpec = swaggerJSDoc(options)
+
 app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument))
 app.use('/api', apis)
 
