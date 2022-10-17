@@ -93,6 +93,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "admin permission denied.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
+                }
+              }
+            }
           }
         }
       }
@@ -129,7 +139,7 @@
             }
           },
           "400": {
-            "description": "error",
+            "description": "資料庫內查無資料",
             "content": {
               "application/json": {
                 "schema": {
@@ -139,11 +149,21 @@
             }
           },
           "401": {
-            "description": "error",
+            "description": "權限不足",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Tweet didn't exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
                 }
               }
             }
@@ -169,7 +189,7 @@
             } 
           },
           "400": {
-            "description": "error",
+            "description": "資料庫內查無資料",
             "content": {
               "application/json": {
                 "schema": {
@@ -179,7 +199,7 @@
             }
           },
           "401": {
-            "description": "error",
+            "description": "權限不足",
             "content": {
               "application/json": {
                 "schema": {
@@ -241,6 +261,16 @@
               }
             }
           }
+        },
+        "500": {
+          "description": "user permission denied.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_500"
+              }
+            }
+          }
         }
       }
     }
@@ -286,6 +316,16 @@
               }
             }
           }
+        },
+        "500": {
+          "description": "Passwords do not match!/Account already exists!/Email already exists!",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_500"
+              }
+            }
+          }
         }
       }
     },
@@ -321,6 +361,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User didn't exist!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
                 }
               }
             }
@@ -427,6 +477,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "User didn't exist!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
           }
         }
       }
@@ -492,6 +552,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Not authorized to edit./Passwords do not match!/All fields are required./User didn't exist./Account or email has already exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
+                }
+              }
+            }
           }
       }
     }
@@ -547,6 +617,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "User didn't exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
+                }
+              }
+            }
           }
         }
       }
@@ -599,6 +679,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/definitions/Error_401"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "User didn't exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
                 }
               }
             }
@@ -711,6 +801,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "User didn't exist.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
+                }
+              }
+            }
           }
         }
       }
@@ -773,6 +873,16 @@
             "application/json": {
               "schema": {
                 "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Not authorized to edit./User didn't exist.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_500"
               }
             }
           }
@@ -972,6 +1082,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Tweet didn't exist!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/Error_500"
+                }
+              }
+            }
           }
         }
       },
@@ -1089,6 +1209,16 @@
               }
             }
           }
+        },
+        "500": {
+          "description": "Tweet didn't exist!/You have liked this tweet!",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
         }
       }
     }
@@ -1136,6 +1266,16 @@
           },
         "401": {
           "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "You haven't liked this tweet!",
           "content": {
             "application/json": {
               "schema": {
@@ -1227,6 +1367,16 @@
               }
             }
           }
+        },
+        "500": {
+          "description": "User didn't exist!/You are already following this user!/You can't follow yourself!",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_500"
+              }
+            }
+          }
         }
       }
     }
@@ -1274,6 +1424,16 @@
           },
         "401": {
           "description": "權限不足",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/Error_401"
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "You haven't followed this user!",
           "content": {
             "application/json": {
               "schema": {
@@ -1944,7 +2104,7 @@
         },
         "FollowerId": {
           "type": "integer",
-          "example": 2
+          "example": 3
         },
         "FollowingId": {
           "type": "integer",
@@ -2018,6 +2178,19 @@
         "message": {
           "type": "string",
           "example": "操作成功"
+        }
+      }
+    },
+    "Error_500": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "string",
+          "example": "error"
+        },
+        "message": {
+          "type": "string",
+          "example": "internal server error"
         }
       }
     }
