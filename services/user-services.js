@@ -186,8 +186,8 @@ const userServices = {
     const { name, introduction } = req.body
     const UserId = getUser(req).dataValues.id
     // 找到圖檔的path
-    const avatarUploaded = req.body.avatar
-    const coverPhotoUploaded = req.body.coverPhoto
+    const avatarUploaded = req.files?.avatar ? req.files.avatar[0] : undefined
+    const coverPhotoUploaded = req.files?.coverPhoto ? req.files.coverPhoto[0] : undefined
     if (Number(req.params.id) !== Number(UserId)) throw new Error('Not authorized to edit.')
     return Promise.all([
       User.findByPk(req.params.id),
